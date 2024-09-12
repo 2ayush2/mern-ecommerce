@@ -1,12 +1,10 @@
 const express = require('express');
-const {PORT}=require('./config/config.js')
-const Products = require('./data/products.js');
-const authRoute = require('./routes/auth-router.js');
-const database=require('./config/db.js')
-const cookieParser=require('cookie-parser')
-
+const { PORT } = require('./config/config.js');
+const productRouter= require('./routes/porductRouter.js'); // Ensure this path is correct
+const authRoute  = require('./routes/auth-router.js'); // Ensure this path is correct
+const database = require('./config/db.js');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const bcrypt = require('bcrypt');
 
 const app = express();
 
@@ -15,25 +13,16 @@ app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
 
-
-// Product routes
-app.get('/api/products', (req, res) => {
-    res.json(Products);
-});
-
-app.get('/api/product/:id', (req, res) => {
-    const product = Products.find((product) => product._id === req.params.id);
-    if (!product) return res.status(404).json({ message: 'Product not found' });
-    res.json(product);
-});
+// Connect to the database
 
 // Home route
 app.get('/home', (req, res) => {
     res.json("This is the data you are searching for");
 });
 
-// Auth route
-app.use('/api', authRoute);
+// Product and Auth routes
+app.use('/api/products', productRouter); // Mount productRouter at /api/products
+app.use('/api', authRoute); // Mount authRoute at /api/auth
 
 // Global error handler
 app.use((err, req, res, next) => {

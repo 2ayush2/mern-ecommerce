@@ -1,8 +1,12 @@
 import axios from "axios";
+import { useContext } from 'react';
+import { UserContext } from "../../context/userContext";
 import { useEffect, useState } from "react";
 
 const AdminDashboard = () => {
     const [data, setData] = useState(null);
+    const { user } = useContext(UserContext);
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -26,7 +30,11 @@ const AdminDashboard = () => {
     if (!data) return <h1>No data available</h1>;
 
     return (
-        <h1>{data.message}</h1>
+        <div>
+        <h1>{data.message} hfoijoidsjoj</h1>
+        <h1>{user} </h1>
+
+        </div>
     );
 };
 

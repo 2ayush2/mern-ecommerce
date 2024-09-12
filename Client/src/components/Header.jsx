@@ -29,12 +29,20 @@ function BasicExample() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             {user ? (
-              <span
+              <>
+               <span
                 onClick={handleLogout}
                 className="px-lg-4 py-2 cursor-pointer"
               >
                 Logout
               </span>
+              <span
+                
+                className="px-lg-4 py-2 cursor-pointer"
+              >
+                {user.role}
+              </span></>
+             
             ) : (
               <Link to='/login' className="px-lg-4 py-2 ">
                 Login

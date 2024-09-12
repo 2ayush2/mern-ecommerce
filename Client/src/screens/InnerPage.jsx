@@ -1,14 +1,22 @@
-import { useState,useEffect } from 'react';
+import { useContext } from 'react';
+import { ProductContext } from '../context/productContext';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useParams } from "react-router-dom";
 import Rating from '../components/Rating';
 
+
+
 function InnerPage() {
+    const {products}=useContext(ProductContext);
+    console.log('Products:', products);
+
+
     
     
     const { id: productId } = useParams();
-    const product = Product.find((p) => p._id === productId);
+    console.log('Product ID from Params:', productId);
+    const product = products.find((p) => p._id === productId);
 
     return (  
         <Card style={{ width: '18rem' }}>
